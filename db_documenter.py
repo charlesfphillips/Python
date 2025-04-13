@@ -23,7 +23,7 @@ try:
     HAS_IBM_DB = True
 except ImportError:
     HAS_IBM_DB = False
-    print("IBM DB2 driver (ibm_db) not available. To install, run: pip install ibm_db ibm_db_sa")
+    print("WARNING: IBM DB2 driver (ibm_db) not available. To install, run: pip install ibm_db ibm_db_sa")
 
 try:
     import pyodbc
@@ -3272,28 +3272,6 @@ def generate_markdown(self, output_dir: str) -> str:
         print(f"HTML documentation generated: {html_file}")
         return html_file
 
-
-def main():
-    parser = argparse.ArgumentParser(description='Generate database documentation')
-    parser.add_argument('--db-type', choices=['mssql', 'db2'], default='mssql', help='Database type')
-    parser.add_argument('--server', help='Database server name')
-    parser.add_argument('--database', help='Database name')
-    parser.add_argument('--port', help='Database port (for DB2)')
-    parser.add_argument('--driver', help='ODBC driver name (optional)')
-    parser.add_argument('--username', help='Database username')
-    parser.add_argument('--password', help='Database password')
-    parser.add_argument('--windows-auth', action='store_true', help='Use Windows authentication (MSSQL only)')
-    parser.add_argument('--output-format', choices=['markdown', 'excel', 'csv', 'json', 'html', 'all'], 
-                        default='all', help='Output format')
-    parser.add_argument('--output-dir', default='./db_documentation', help='Output directory')
-    parser.add_argument('--erd', action='store_true', help='Generate ERD diagram')
-    parser.add_argument('--graphviz-path', help='Path to Graphviz bin directory')
-    parser.add_argument('--jdbc-url', help='JDBC URL for DB2 connection (alternative to server/database)')
-    
-    args = parser.parse_args()
-    
-    # Create output directory if it doesn't exist
-    os.makedirs(args.output_dir, exist_ok=True)
     
 def main():
     parser = argparse.ArgumentParser(description='Generate database documentation')
@@ -3412,7 +3390,6 @@ def main():
 
 if __name__ == '__main__':
     main()
-
 
 
 
